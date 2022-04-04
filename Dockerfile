@@ -1,4 +1,4 @@
-FROM castlemock/castlemock:v1.58
+FROM castlemock/castlemock:v1.63
 
 RUN unzip /usr/local/tomcat/webapps/castlemock.war -d /usr/local/tomcat/webapps/castlemock && \
     rm /usr/local/tomcat/webapps/castlemock.war && \

@@ -1,11 +1,11 @@
-FROM tomcat:8.5-jdk11-openjdk as build
+FROM tomcat:8.5.96-jdk11-temurin as build
 
 ENV CASTLEMOCK_VERSION=1.63
 
 WORKDIR /tmp
 
 RUN apt update && \
-    apt install maven -y
+    apt install maven git zip -y
 
 RUN git clone https://github.com/castlemock/castlemock.git && \
     cd castlemock && \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/webapps/castlemock && \
     unzip /tmp/castlemock/deploy/deploy-tomcat/deploy-tomcat-war/target/castlemock.war -d /tmp/webapps/castlemock
 
 # MOSTLY replicated from https://github.com/castlemock/docker/blob/master/Dockerfile
-FROM tomcat:8.5-jdk11-openjdk
+FROM tomcat:8.5.96-jdk11-temurin
 
 COPY --from=build /tmp/webapps/castlemock /usr/local/tomcat/webapps/castlemock
 
